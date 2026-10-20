@@ -122,7 +122,7 @@ const styles = StyleSheet.create({
   avatarWrap: { width: 40, height: 40, borderRadius: 40, overflow: 'hidden' },
   avatar: { width: '100%', height: '100%' },
   featured: { width: '100%', height: 528, marginTop: 5, marginBottom: 16, overflow: 'hidden', backgroundColor: colors.backgroundElement, justifyContent: 'flex-end' },
-  featuredOverlay: { ...StyleSheet.absoluteFill, backgroundColor: colors.featuredOverlayTint, experimental_backgroundImage: 'linear-gradient(180deg, #08080D33 0%, #08080D55 40%, #08080D 100%)' } as never,
+  featuredOverlay: { ...StyleSheet.absoluteFill, backgroundColor: colors.featuredOverlayTint, experimental_backgroundImage: 'linear-gradient(180deg, #08080D33 0%, #08080d79 40%, #08080D 100%)' } as never,
   featuredContent: { paddingHorizontal: 24, paddingBottom: 24, gap: 11 },
   featuredTags: { flexDirection: 'row', alignItems: 'center', flexWrap: 'wrap', gap: 10, marginBottom: 3 },
   spotlight: { borderRadius: 14, paddingHorizontal: 9, paddingVertical: 5, backgroundColor: colors.spotlightBackgroundTranslucent, borderWidth: 1, borderColor: colors.spotlightText },
