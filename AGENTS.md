@@ -36,6 +36,9 @@ Docs: https://docs.expo.dev/eas/index.md
 
 ## Rules
 
+- Name theme colors by semantic role (such as `defaultText`, `buttonBackground`, or `badgeBackground`), never by the component that consumes them. Keep colors reusable across components.
+- Keep route files in `src/app/`. Put reusable components in `src/components/`; put components used only by one screen in `src/screens/<screen>/components/` beside that screen's implementation.
+
 - Store every application icon or illustration as an SVG under `assets/svg/`, organized into `assets/svg/icon/` and `assets/svg/illustration/`.
 - Import SVGs as components and render them directly in JSX; use the `color`, `width`, and `height` props when needed (for example, `import EyeIcon from '@/assets/svg/icon/eye.svg'` followed by `<EyeIcon color={colors.textDefault} width={24} height={24} />`).
 - Use `currentColor` for SVG `fill` and/or `stroke` values that should follow the component's `color` prop.
