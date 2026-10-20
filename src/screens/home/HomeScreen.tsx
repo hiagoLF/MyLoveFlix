@@ -21,9 +21,9 @@ function openAvailableSoon() {
   router.push('/soon');
 }
 
-function IconButton({ children, label, onPress = openAvailableSoon }: { children: React.ReactNode; label: string; onPress?: () => void }) {
+function IconButton({ children, label, onPress = openAvailableSoon, highlighted = false }: { children: React.ReactNode; label: string; onPress?: () => void; highlighted?: boolean }) {
   return (
-    <Pressable onPress={onPress} style={styles.iconButton} accessibilityRole="button" accessibilityLabel={label}>
+    <Pressable onPress={onPress} style={[styles.iconButton, highlighted && styles.highlightedIconButton]} accessibilityRole="button" accessibilityLabel={label}>
       {children}
     </Pressable>
   );
@@ -41,11 +41,13 @@ export default function HomeScreen() {
     <SafeAreaView style={styles.safeArea} edges={['top']}>
       <ScrollView style={styles.scroll} contentContainerStyle={styles.content} showsVerticalScrollIndicator={false}>
         <View style={styles.header}>
-          <Text style={styles.brand}>LOVE<Text style={styles.brandAccent}>FLIX</Text></Text>
+          <IconButton label="Favoritos" highlighted><HeartIcon color={colors.accentText} width={18} height={17} /></IconButton>
           <View style={styles.headerActions}>
-            <IconButton label="Favoritos"><HeartIcon color={colors.secondaryText} width={20} height={19} /></IconButton>
             <IconButton label="Buscar"><GlassSearchIcon color={colors.secondaryText} width={18} height={18} /></IconButton>
-            <IconButton label="Notificações"><BellIcon color={colors.secondaryText} width={18} height={20} /></IconButton>
+            <View style={styles.notificationButton}>
+              <IconButton label="Notificações"><BellIcon color={colors.secondaryText} width={18} height={20} /></IconButton>
+              <View style={styles.notificationDot} />
+            </View>
             <Pressable onPress={openAvailableSoon} accessibilityRole="button" accessibilityLabel="Perfil" style={styles.avatarWrap}>
               <Image source={{ uri: 'https://picsum.photos/id/64/100/100.jpg' }} style={styles.avatar} />
             </Pressable>
@@ -102,12 +104,13 @@ const styles = StyleSheet.create({
   safeArea: { flex: 1, backgroundColor: colors.background },
   scroll: { flex: 1 },
   content: { paddingBottom: 24 },
-  header: { height: 58, paddingHorizontal: 17, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' },
-  brand: { color: colors.defaultText, fontSize: 17, fontWeight: '900', letterSpacing: 1.2 },
-  brandAccent: { color: colors.accent },
-  headerActions: { flexDirection: 'row', alignItems: 'center', gap: 11 },
-  iconButton: { width: 32, height: 36, justifyContent: 'center', alignItems: 'center' },
-  avatarWrap: { width: 31, height: 31, borderRadius: 16, borderWidth: 1.5, borderColor: colors.accent, overflow: 'hidden' },
+  header: { paddingHorizontal: 16, paddingVertical: 12, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' },
+  headerActions: { flexDirection: 'row', alignItems: 'center', gap: 12 },
+  iconButton: { width: 32, height: 32, justifyContent: 'center', alignItems: 'center' },
+  highlightedIconButton: { borderRadius: 6, backgroundColor: colors.accent },
+  notificationButton: { position: 'relative' },
+  notificationDot: { position: 'absolute', top: 4, right: 5, width: 7, height: 7, borderRadius: 4, backgroundColor: colors.accent },
+  avatarWrap: { width: 40, height: 40, borderRadius: 40, overflow: 'hidden' },
   avatar: { width: '100%', height: '100%' },
   featured: { height: 485, marginHorizontal: 12, marginTop: 5, marginBottom: 16, borderRadius: 17, overflow: 'hidden', backgroundColor: colors.backgroundElement, justifyContent: 'flex-end' },
   featuredOverlay: { ...StyleSheet.absoluteFill, experimental_backgroundImage: 'linear-gradient(180deg, #08080D00 24%, #08080D44 48%, #08080D 100%)' } as never,
