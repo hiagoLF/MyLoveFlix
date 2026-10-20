@@ -41,7 +41,7 @@ export const series: Series[] = [
 export const genres = ['All', 'Romance', 'Drama', 'Fantasy', 'Thriller', 'Comedy'];
 
 export const feedSections = [
-  { title: 'Romance', subGenres: ['Trending Romance', 'Forbidden Love'] },
-  { title: 'Popular Micro Dramas', subGenres: ['Billionaire Romance', 'Second Chance'] },
-  { title: 'More to Love', subGenres: ['Fantasy Romance', 'Fake Dating'] },
+  { title: 'Romance', gradient: 'linear-gradient(90deg, #64EDF7 0%, #CB64F7 100%)', subGenres: ['Trending Romance', 'Forbidden Love'] },
+  { title: 'Popular Micro Dramas', color: '#F5F5F5', subGenres: ['Billionaire Romance', 'Second Chance'] },
+  { title: 'More to Love', color: '#F5F5F5', subGenres: ['Fantasy Romance', 'Fake Dating'] },
 ];

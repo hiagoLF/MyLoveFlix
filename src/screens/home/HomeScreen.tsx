@@ -1,3 +1,4 @@
+import { MaskedView } from '@expo/ui/community/masked-view';
 import { router } from 'expo-router';
 import { useMemo, useState } from 'react';
 import { Image, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
@@ -89,8 +90,23 @@ export default function HomeScreen() {
         {visibleSections.map((section) => (
           <View key={section.title} style={styles.section}>
             <View style={styles.sectionHeading}>
-              <View style={styles.sectionAccent} />
-              <Text style={styles.sectionTitle}>{section.title}</Text>
+              {section.gradient ? (
+                <MaskedView
+                  style={styles.gradientSectionHeading}
+                  maskElement={(
+                    <View style={styles.sectionHeadingMask}>
+                      <View style={styles.sectionAccent} />
+                      <Text style={styles.sectionTitle}>{section.title}</Text>
+                    </View>
+                  )}>
+                  <View style={[StyleSheet.absoluteFill, { experimental_backgroundImage: section.gradient }]} />
+                </MaskedView>
+              ) : (
+                <>
+                  <View style={[styles.sectionAccent, { backgroundColor: section.color }]} />
+                  <Text style={[styles.sectionTitle, { color: section.color }]}>{section.title}</Text>
+                </>
+              )}
             </View>
             {section.subGenres.map((subGenre) => {
               const items = section.items.filter((item) => item.subGenres.includes(subGenre));
@@ -140,8 +156,10 @@ const styles = StyleSheet.create({
   watchLabel: { color: colors.buttonText, fontSize: 13, fontWeight: '800' },
   addButton: { width: 43, height: 43, borderRadius: 23, backgroundColor: colors.buttonVariantBackground, borderWidth: 1, borderColor: colors.buttonVariantBorder, alignItems: 'center', justifyContent: 'center' },
   section: { marginTop: 22 },
-  sectionHeading: { flexDirection: 'row', alignItems: 'center', gap: 9, paddingHorizontal: 17, marginBottom: 13 },
-  sectionAccent: { width: 8, height: 8, borderRadius: 2, backgroundColor: colors.accent },
+  sectionHeading: { minWidth: 220, flexDirection: 'row', alignItems: 'center', gap: 9, paddingHorizontal: 17, marginBottom: 13 },
+  gradientSectionHeading: { flex: 1, height: 24 },
+  sectionHeadingMask: { flex: 1, flexDirection: 'row', alignItems: 'center', gap: 9 },
+  sectionAccent: { width: 24, height: 24, borderRadius: 2, backgroundColor: 'black' },
   sectionTitle: { color: colors.defaultText, fontSize: 20, fontWeight: '800' },
   subSection: { marginBottom: 17 },
   subTitle: { color: colors.secondaryText, fontSize: 14, fontWeight: '700', paddingHorizontal: 17, marginBottom: 9 },
