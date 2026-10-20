@@ -37,6 +37,7 @@ Docs: https://docs.expo.dev/eas/index.md
 ## Rules
 
 - Name theme colors by semantic role (such as `defaultText`, `buttonBackground`, or `badgeBackground`), never by the component that consumes them. Keep colors reusable across components.
+- Keep every interface color faithful to its visual reference; add semantic theme colors or adjust existing theme colors when needed to match it.
 - Keep route files in `src/app/`. Put reusable components in `src/components/`; put components used only by one screen in `src/screens/<screen>/components/` beside that screen's implementation.
 
 - Store every application icon or illustration as an SVG under `assets/svg/`, organized into `assets/svg/icon/` and `assets/svg/illustration/`.
