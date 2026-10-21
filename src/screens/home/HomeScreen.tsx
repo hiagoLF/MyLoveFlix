@@ -1,4 +1,3 @@
-import { MaskedView } from '@expo/ui/community/masked-view';
 import { router } from 'expo-router';
 import { useMemo, useState } from 'react';
 import { Image, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
@@ -10,6 +9,7 @@ import HeartIcon from '@/assets/svg/icon/heart.svg';
 import PlayIcon from '@/assets/svg/icon/play.svg';
 import PlusIcon from '@/assets/svg/icon/plus.svg';
 import StarIcon from '@/assets/svg/icon/star.svg';
+import { AutoWidthMaskedView } from '@/components/AutoWidthMaskedView';
 import { Colors } from '@/constants/theme';
 import { feedSections, genres, series } from '@/mock/mock';
 
@@ -91,16 +91,12 @@ export default function HomeScreen() {
           <View key={section.title} style={styles.section}>
             <View style={styles.sectionHeading}>
               {section.gradient ? (
-                <MaskedView
-                  style={styles.gradientSectionHeading}
-                  maskElement={(
-                    <View style={styles.sectionHeadingMask}>
-                      <View style={styles.sectionAccent} />
-                      <Text style={styles.sectionTitle}>{section.title}</Text>
-                    </View>
-                  )}>
-                  <View style={[StyleSheet.absoluteFill, { experimental_backgroundImage: section.gradient }]} />
-                </MaskedView>
+                <AutoWidthMaskedView style={{ height: 24, experimental_backgroundImage: section.gradient }}>
+                  <View style={styles.sectionHeadingMask}>
+                    <View style={styles.sectionAccent} />
+                    <Text style={styles.sectionTitle}>{section.title}</Text>
+                  </View>
+                </AutoWidthMaskedView>
               ) : (
                 <>
                   <View style={[styles.sectionAccent, { backgroundColor: section.color }]} />
@@ -157,8 +153,7 @@ const styles = StyleSheet.create({
   addButton: { width: 43, height: 43, borderRadius: 23, backgroundColor: colors.buttonVariantBackground, borderWidth: 1, borderColor: colors.buttonVariantBorder, alignItems: 'center', justifyContent: 'center' },
   section: { marginTop: 22 },
   sectionHeading: { minWidth: 220, flexDirection: 'row', alignItems: 'center', gap: 9, paddingHorizontal: 17, marginBottom: 13 },
-  gradientSectionHeading: { flex: 1, height: 24 },
-  sectionHeadingMask: { flex: 1, flexDirection: 'row', alignItems: 'center', gap: 9 },
+  sectionHeadingMask: { flexDirection: 'row', alignItems: 'center', gap: 9 },
   sectionAccent: { width: 24, height: 24, borderRadius: 2, backgroundColor: 'black' },
   sectionTitle: { color: colors.defaultText, fontSize: 20, fontWeight: '800' },
   subSection: { marginBottom: 17 },
