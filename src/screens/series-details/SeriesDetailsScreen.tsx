@@ -17,6 +17,7 @@ import ShineStarIcon from '@/assets/svg/icon/shine-star.svg';
 import UnlockIcon from '@/assets/svg/icon/unlock.svg';
 import { Colors } from '@/constants/theme';
 import { defaultSeriesSynopsis, type Series } from '@/mock/mock';
+import { seriesEpisodes } from '@/mock/seriesEpisodes';
 import { useMockData } from '@/mock/useMockData';
 
 const colors = Colors.dark;
@@ -27,14 +28,6 @@ const castAndCrew = [
   { name: 'Maya Brooks', role: 'Nina', imageUrl: 'https://picsum.photos/id/1011/180/180.jpg' },
   { name: 'Lucas Reed', role: 'Director', imageUrl: 'https://picsum.photos/id/1001/180/180.jpg' },
   { name: 'Ava Morgan', role: 'Writer', imageUrl: 'https://picsum.photos/id/1012/180/180.jpg' },
-];
-
-const episodes = [
-  { number: 1, title: 'The Promise', duration: '2 min', imageId: 1011, locked: false },
-  { number: 2, title: 'A Different World', duration: '3 min', imageId: 1012, locked: false },
-  { number: 3, title: 'Unexpected Guests', duration: '2 min', imageId: 1013, locked: false },
-  { number: 4, title: 'The Secret', duration: '3 min', imageId: 1014, locked: true },
-  { number: 5, title: 'Closer Than Ever', duration: '2 min', imageId: 1015, locked: true },
 ];
 
 const recommendationIds = ['s02', 's03', 's04', 's05', 's06', 's07', 's08', 's09'];
@@ -183,8 +176,17 @@ export default function SeriesDetailsScreen() {
           </Pressable>
 
           <View style={styles.episodeList}>
-            {episodes.map((episode) => (
-              <Pressable key={episode.number} accessibilityRole="button" accessibilityLabel={`Episode ${episode.number}${episode.locked ? ', locked' : ''}`} style={styles.episodeRow}>
+            {seriesEpisodes.map((episode) => (
+              <Pressable
+                key={episode.number}
+                onPress={episode.locked ? () => router.push({
+                  pathname: '/unlock-episode',
+                  params: { id: selectedSeries.id, episodeNumber: String(episode.number) },
+                }) : undefined}
+                accessibilityRole="button"
+                accessibilityLabel={`Episode ${episode.number}${episode.locked ? ', locked' : ''}`}
+                style={styles.episodeRow}
+              >
                 <View style={styles.episodeThumbnailWrap}>
                   <Image source={{ uri: `https://picsum.photos/id/${episode.imageId}/240/140.jpg` }} style={styles.episodeThumbnail} />
                   <View style={styles.thumbnailShade} />

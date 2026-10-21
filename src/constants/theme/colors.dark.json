@@ -43,5 +43,14 @@
   "tabInactive": "#817F9E",
   "divider": "#25243A",
   "overlayStart": "#08080D00",
-  "overlayEnd": "#08080D"
+  "overlayEnd": "#08080D",
+  "screenBackgroundStrong": "#000000",
+  "surfaceElevated": "#1A192F",
+  "surfaceBorder": "#322F56",
+  "secondaryTextStrong": "#B8B6CC",
+  "coinAccent": "#48E6EF",
+  "coinActionBackground": "#203143",
+  "bonusText": "#D86AFF",
+  "surfaceOverlay": "#171629",
+  "surfaceOverlayBorder": "#28263F"
 }

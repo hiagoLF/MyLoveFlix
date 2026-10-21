@@ -6,6 +6,7 @@ export default function TabLayout() {
       <Stack screenOptions={{ headerShown: false }}>
         <Stack.Screen name="(tabs)" />
         <Stack.Screen name="series/[id]" />
+        <Stack.Screen name="unlock-episode" />
       </Stack>
     </ThemeProvider>
   );
