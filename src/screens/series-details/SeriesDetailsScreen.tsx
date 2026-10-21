@@ -69,6 +69,10 @@ export default function SeriesDetailsScreen() {
 
   const favoriteLabel = selectedSeries.isFavorite ? 'Remove from favorites' : 'Add to favorites';
   const toggleCurrentFavorite = () => toggleFavorite(selectedSeries.id);
+  const openPlayer = (episodeNumber?: number) => router.push({
+    pathname: '/player' as never,
+    params: episodeNumber ? { episodeNumber: String(episodeNumber) } : undefined,
+  });
 
   return (
     <View style={styles.screen}>
@@ -111,7 +115,7 @@ export default function SeriesDetailsScreen() {
               </View>
             </View>
             <View style={styles.primaryActions}>
-              <Pressable style={styles.playButton} accessibilityRole="button" accessibilityLabel="Play series">
+              <Pressable onPress={() => openPlayer()} style={styles.playButton} accessibilityRole="button" accessibilityLabel="Play series">
                 <PlayIcon color={colors.buttonText} width={12} height={14} />
                 <Text style={styles.playLabel}>Play</Text>
               </Pressable>
@@ -179,10 +183,9 @@ export default function SeriesDetailsScreen() {
             {seriesEpisodes.map((episode) => (
               <Pressable
                 key={episode.number}
-                onPress={episode.locked ? () => router.push({
-                  pathname: '/unlock-episode',
-                  params: { id: selectedSeries.id, episodeNumber: String(episode.number) },
-                }) : undefined}
+                onPress={episode.locked
+                  ? () => router.push({ pathname: '/unlock-episode', params: { id: selectedSeries.id, episodeNumber: String(episode.number) } })
+                  : () => openPlayer(episode.number)}
                 accessibilityRole="button"
                 accessibilityLabel={`Episode ${episode.number}${episode.locked ? ', locked' : ''}`}
                 style={styles.episodeRow}

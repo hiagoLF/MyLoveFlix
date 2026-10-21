@@ -7,6 +7,7 @@ export default function TabLayout() {
         <Stack.Screen name="(tabs)" />
         <Stack.Screen name="series/[id]" />
         <Stack.Screen name="unlock-episode" />
+        <Stack.Screen name="player" options={{ presentation: 'fullScreenModal', animation: 'fade' }} />
       </Stack>
     </ThemeProvider>
   );
