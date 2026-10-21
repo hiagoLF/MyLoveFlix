@@ -11,6 +11,7 @@ import PlusIcon from '@/assets/svg/icon/plus.svg';
 import StarIcon from '@/assets/svg/icon/star.svg';
 import { AutoWidthMaskedView } from '@/components/AutoWidthMaskedView';
 import { Colors } from '@/constants/theme';
+import type { Series } from '@/mock/mock';
 import { feedSections, genres, series } from '@/mock/mock';
 
 import { HorizontalGenres } from './components/HorizontalGenres';
@@ -21,6 +22,10 @@ const featured = series[0];
 
 function openAvailableSoon() {
   router.push('/soon');
+}
+
+function openSeriesDetails(item: Series) {
+  router.push({ pathname: '/series/[id]', params: { id: item.id } });
 }
 
 function IconButton({ children, label, onPress = openAvailableSoon, highlighted = false }: { children: React.ReactNode; label: string; onPress?: () => void; highlighted?: boolean }) {
@@ -111,7 +116,7 @@ export default function HomeScreen() {
               return (
                 <View key={subGenre} style={styles.subSection}>
                   <Text style={styles.subTitle}>{subGenre}</Text>
-                  <HorizontalMediaLista items={items} onPressItem={openAvailableSoon} />
+                  <HorizontalMediaLista items={items} onPressItem={openSeriesDetails} />
                 </View>
               );
             })}

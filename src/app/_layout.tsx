@@ -1,11 +1,12 @@
-import { DarkTheme, ThemeProvider } from 'expo-router';
-
-import AppTabs from '@/components/app-tabs';
+import { DarkTheme, Stack, ThemeProvider } from 'expo-router';
 
 export default function TabLayout() {
   return (
     <ThemeProvider value={DarkTheme}>
-      <AppTabs />
+      <Stack screenOptions={{ headerShown: false }}>
+        <Stack.Screen name="(tabs)" />
+        <Stack.Screen name="series/[id]" />
+      </Stack>
     </ThemeProvider>
   );
 }

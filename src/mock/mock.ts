@@ -9,7 +9,11 @@ export type Series = {
   score: number;
   episodesAmount: number;
   averageEpisodeDurationMinutes: number;
+  releaseYear: number;
+  isFavorite: boolean;
 };
+
+export const defaultSeriesSynopsis = 'When a chance encounter brings two very different lives together, an unexpected connection turns into a story of second chances, brave choices, and a love worth fighting for.';
 
 const episodeDurationsBySeriesId: Record<string, number> = {
   s01: 2, s02: 3, s03: 2, s04: 3, s05: 2,
@@ -47,7 +51,10 @@ export const series: Series[] = [
   { id: 's25', title: 'Quando as Estrelas Caem', description: 'Quando estrelas caem, dois destinos se cruzam em uma aventura mágica.', imageUrl: 'https://picsum.photos/id/125/200/300.jpg', isPro: false, genres: ['Fantasy', 'Romance'], subGenres: ['Fantasy Romance', 'Second Chance'], score: 4.4, episodesAmount: 49 },
 ].map((item) => ({
   ...item,
+  description: defaultSeriesSynopsis,
   averageEpisodeDurationMinutes: episodeDurationsBySeriesId[item.id],
+  releaseYear: 2020 + (Number(item.id.slice(1)) % 6),
+  isFavorite: false,
 }));
 
 export const genres = ['All', 'Romance', 'Drama', 'Fantasy', 'Thriller', 'Comedy'];
