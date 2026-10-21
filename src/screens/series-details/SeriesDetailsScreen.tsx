@@ -47,7 +47,7 @@ function IconButton({ children, label, onPress }: { children: React.ReactNode; l
 export default function SeriesDetailsScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
   const { series, getSeriesById, toggleFavorite } = useMockData();
-  const { top } = useSafeAreaInsets();
+  const { top, bottom } = useSafeAreaInsets();
   const selectedSeries = getSeriesById(id);
   const recommendations = useMemo(
     () => recommendationIds
@@ -72,7 +72,7 @@ export default function SeriesDetailsScreen() {
 
   return (
     <View style={styles.screen}>
-      <ScrollView contentContainerStyle={styles.scrollContent} showsVerticalScrollIndicator={false}>
+      <ScrollView contentContainerStyle={{ paddingBottom: 35 + bottom }} showsVerticalScrollIndicator={false}>
         <View style={styles.hero}>
           <Image source={{ uri: selectedSeries.imageUrl }} style={StyleSheet.absoluteFill} resizeMode="cover" />
           <View pointerEvents="none" style={styles.heroOverlay} />
@@ -237,7 +237,6 @@ export default function SeriesDetailsScreen() {
 
 const styles = StyleSheet.create({
   screen: { flex: 1, backgroundColor: colors.background },
-  scrollContent: { paddingBottom: 35 },
   hero: { height: 592, justifyContent: 'space-between', backgroundColor: colors.backgroundElement, overflow: 'hidden' },
   heroOverlay: { ...StyleSheet.absoluteFill, backgroundColor: colors.featuredOverlayTint, experimental_backgroundImage: colors.detailsHeroOverlayGradient } as never,
   topActions: { zIndex: 1, paddingHorizontal: 20, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' },
