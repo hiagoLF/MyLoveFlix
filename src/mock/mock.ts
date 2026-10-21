@@ -8,6 +8,15 @@ export type Series = {
   subGenres: string[];
   score: number;
   episodesAmount: number;
+  averageEpisodeDurationMinutes: number;
+};
+
+const episodeDurationsBySeriesId: Record<string, number> = {
+  s01: 2, s02: 3, s03: 2, s04: 3, s05: 2,
+  s06: 3, s07: 2, s08: 3, s09: 2, s10: 3,
+  s11: 2, s12: 3, s13: 2, s14: 3, s15: 2,
+  s16: 3, s17: 2, s18: 3, s19: 2, s20: 3,
+  s21: 2, s22: 3, s23: 2, s24: 3, s25: 2,
 };
 
 export const series: Series[] = [
@@ -36,7 +45,10 @@ export const series: Series[] = [
   { id: 's23', title: 'Flores para Você', description: 'Um gesto delicado ajuda duas pessoas a recomeçar juntas.', imageUrl: 'https://picsum.photos/id/123/200/300.jpg', isPro: false, genres: ['Romance', 'Drama'], subGenres: ['Second Chance', 'Campus Romance'], score: 4.0, episodesAmount: 36 },
   { id: 's24', title: 'O Jogo da Sedução', description: 'Um jogo de sedução no trabalho se torna difícil de controlar.', imageUrl: 'https://picsum.photos/id/124/200/300.jpg', isPro: true, genres: ['Romance', 'Drama'], subGenres: ['Office Romance', 'Forbidden Love'], score: 4.7, episodesAmount: 63 },
   { id: 's25', title: 'Quando as Estrelas Caem', description: 'Quando estrelas caem, dois destinos se cruzam em uma aventura mágica.', imageUrl: 'https://picsum.photos/id/125/200/300.jpg', isPro: false, genres: ['Fantasy', 'Romance'], subGenres: ['Fantasy Romance', 'Second Chance'], score: 4.4, episodesAmount: 49 },
-];
+].map((item) => ({
+  ...item,
+  averageEpisodeDurationMinutes: episodeDurationsBySeriesId[item.id],
+}));
 
 export const genres = ['All', 'Romance', 'Drama', 'Fantasy', 'Thriller', 'Comedy'];
 
