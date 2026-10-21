@@ -4,22 +4,22 @@ import { Image, Pressable, ScrollView, StyleSheet, Text, View } from 'react-nati
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import ArrowLeftIcon from '@/assets/svg/icon/arrow-left.svg';
+import ArrowRightIcon from '@/assets/svg/icon/arrow-right.svg';
+import ClockIcon from '@/assets/svg/icon/clock.svg';
+import FireIcon from '@/assets/svg/icon/fire.svg';
 import HeartIcon from '@/assets/svg/icon/heart.svg';
-import LockIcon from '@/assets/svg/icon/unlock.svg';
+import LockIcon from '@/assets/svg/icon/lock.svg';
 import PlayIcon from '@/assets/svg/icon/play.svg';
+import PlaylistIcon from '@/assets/svg/icon/playlist.svg';
 import ShareIcon from '@/assets/svg/icon/share.svg';
 import StarIcon from '@/assets/svg/icon/star.svg';
+import ShineStarIcon from '@/assets/svg/icon/shine-star.svg';
+import UnlockIcon from '@/assets/svg/icon/unlock.svg';
 import { Colors } from '@/constants/theme';
 import { defaultSeriesSynopsis, type Series } from '@/mock/mock';
 import { useMockData } from '@/mock/useMockData';
 
 const colors = Colors.dark;
-
-const reasonsToLove = [
-  { title: 'A slow-burn romance', detail: 'Every glance and little gesture brings them closer.' },
-  { title: 'Characters with heart', detail: 'Root for two people finding courage in each other.' },
-  { title: 'One more episode energy', detail: 'Short episodes make every cliffhanger irresistible.' },
-];
 
 const castAndCrew = [
   { name: 'Sofia Chen', role: 'Luna', imageUrl: 'https://picsum.photos/id/1027/180/180.jpg' },
@@ -106,22 +106,24 @@ export default function SeriesDetailsScreen() {
             <Text style={styles.title}>{selectedSeries.title}</Text>
             <View style={styles.metadata}>
               <View style={styles.rating}>
-                <StarIcon color={colors.accent} width={15} height={15} />
+                <StarIcon color={colors.secondaryText} width={15} height={15} />
                 <Text style={styles.metadataText}>{selectedSeries.score.toFixed(1)}</Text>
               </View>
               <View style={styles.metadataDot} />
               <Text style={styles.metadataText}>{selectedSeries.releaseYear}</Text>
               <View style={styles.metadataDot} />
-              <Text style={styles.metadataText}>{selectedSeries.episodesAmount} Episodes</Text>
+              <View style={styles.episodeCount}>
+                <PlaylistIcon color={colors.secondaryText} width={14} height={14} />
+                <Text style={styles.metadataText}>{selectedSeries.episodesAmount} Episodes</Text>
+              </View>
             </View>
             <View style={styles.primaryActions}>
               <Pressable style={styles.playButton} accessibilityRole="button" accessibilityLabel="Play series">
                 <PlayIcon color={colors.buttonText} width={12} height={14} />
                 <Text style={styles.playLabel}>Play</Text>
               </Pressable>
-              <Pressable onPress={toggleCurrentFavorite} style={styles.favoriteButton} accessibilityRole="button" accessibilityLabel={favoriteLabel}>
+              <Pressable onPress={toggleCurrentFavorite} style={[styles.favoriteButton, selectedSeries.isFavorite && styles.favoriteButtonActive]} accessibilityRole="button" accessibilityLabel={favoriteLabel}>
                 <HeartIcon color={selectedSeries.isFavorite ? colors.accent : colors.defaultText} width={18} height={17} />
-                <Text style={styles.favoriteLabel}>{selectedSeries.isFavorite ? 'In Favorites' : 'Add to Favorites'}</Text>
               </Pressable>
             </View>
           </View>
@@ -130,23 +132,26 @@ export default function SeriesDetailsScreen() {
         <View style={styles.section}>
           <SectionHeading>Synopsis</SectionHeading>
           <Text style={styles.synopsis}>{defaultSeriesSynopsis}</Text>
-          <Pressable accessibilityRole="button" style={styles.readMoreButton}>
-            <Text style={styles.readMore}>Read more</Text>
-          </Pressable>
         </View>
 
         <View style={styles.section}>
           <SectionHeading>Why You’ll Love It</SectionHeading>
-          <View style={styles.reasonList}>
-            {reasonsToLove.map((reason, index) => (
-              <View style={styles.reasonRow} key={reason.title}>
-                <View style={[styles.reasonNumber, index === 1 && styles.reasonNumberAlternate]}><Text style={styles.reasonNumberText}>0{index + 1}</Text></View>
-                <View style={styles.reasonCopy}>
-                  <Text style={styles.reasonTitle}>{reason.title}</Text>
-                  <Text style={styles.reasonDetail}>{reason.detail}</Text>
-                </View>
+          <View style={styles.loveCard}>
+            <View style={styles.loveItem}>
+              <FireIcon color={colors.spotlightText} width={17} height={20} />
+              <View style={styles.loveCopy}>
+                <Text style={styles.loveTitle}>A slow-burn romance</Text>
+                <Text style={styles.loveDetail}>Every glance and little gesture brings them closer.</Text>
               </View>
-            ))}
+            </View>
+            <View style={styles.loveDivider} />
+            <View style={styles.loveItem}>
+              <ShineStarIcon color={colors.accent} width={18} height={18} />
+              <View style={styles.loveCopy}>
+                <Text style={styles.loveTitle}>One more episode energy</Text>
+                <Text style={styles.loveDetail}>Short episodes make every cliffhanger irresistible.</Text>
+              </View>
+            </View>
           </View>
         </View>
 
@@ -169,12 +174,12 @@ export default function SeriesDetailsScreen() {
             <Text style={styles.seasonLabel}>Season 1</Text>
           </View>
           <Pressable accessibilityRole="button" style={styles.unlockCard}>
-            <View style={styles.unlockIcon}><LockIcon color={colors.accent} width={18} height={18} /></View>
+            <View style={styles.unlockIcon}><UnlockIcon color={colors.spotlightText} width={18} height={18} /></View>
             <View style={styles.unlockCopy}>
               <Text style={styles.unlockTitle}>Unlock Full Season</Text>
               <Text style={styles.unlockSubtitle}>Get access to every episode</Text>
             </View>
-            <Text style={styles.unlockArrow}>›</Text>
+            <ArrowRightIcon color={colors.spotlightText} width={14} height={14} />
           </Pressable>
 
           <View style={styles.episodeList}>
@@ -184,19 +189,29 @@ export default function SeriesDetailsScreen() {
                   <Image source={{ uri: `https://picsum.photos/id/${episode.imageId}/240/140.jpg` }} style={styles.episodeThumbnail} />
                   <View style={styles.thumbnailShade} />
                   <Text style={styles.episodeNumber}>{String(episode.number).padStart(2, '0')}</Text>
-                  {episode.locked && <View style={styles.episodeLock}><LockIcon color={colors.defaultText} width={12} height={12} /></View>}
+                  <View style={styles.episodePlayButton}>
+                    {episode.locked
+                      ? <LockIcon color={colors.defaultText} width={13} height={13} />
+                      : <PlayIcon color={colors.defaultText} width={10} height={12} />}
+                  </View>
                 </View>
                 <View style={styles.episodeCopy}>
                   <Text style={styles.episodeTitle}>{episode.title}</Text>
-                  <Text style={styles.episodeDuration}>{episode.duration}</Text>
+                  <View style={styles.episodeMeta}>
+                    <ClockIcon color={colors.mutedText} width={12} height={12} />
+                    <Text style={styles.episodeDuration}>{episode.duration}</Text>
+                    {episode.locked && <>
+                      <Text style={styles.episodeUnlock}>Unlock</Text>
+                      <LockIcon color={colors.spotlightText} width={12} height={12} />
+                    </>}
+                  </View>
                 </View>
-                {episode.locked && <LockIcon color={colors.spotlightText} width={16} height={16} />}
               </Pressable>
             ))}
           </View>
           <Pressable accessibilityRole="button" style={styles.showMoreButton}>
-            <Text style={styles.showMoreLabel}>Show More Episodes</Text>
-            <Text style={styles.showMoreChevron}>⌄</Text>
+            <Text style={styles.showMoreLabel}>Show more episodes</Text>
+            <ArrowRightIcon color={colors.secondaryText} width={12} height={12} />
           </Pressable>
         </View>
 
@@ -207,7 +222,7 @@ export default function SeriesDetailsScreen() {
               <Pressable key={item.id} onPress={() => router.push({ pathname: '/series/[id]', params: { id: item.id } })} style={styles.recommendationCard} accessibilityRole="button" accessibilityLabel={`View ${item.title}`}>
                 <Image source={{ uri: item.imageUrl }} style={styles.recommendationImage} />
                 <View style={styles.recommendationGradient} />
-                <View style={styles.recommendationMeta}><StarIcon color={colors.accent} width={12} height={12} /><Text style={styles.recommendationScore}>{item.score.toFixed(1)}</Text></View>
+                <View style={styles.recommendationMeta}><StarIcon color={colors.secondaryText} width={12} height={12} /><Text style={styles.recommendationScore}>{item.score.toFixed(1)}</Text></View>
                 <Text numberOfLines={2} style={styles.recommendationTitle}>{item.title}</Text>
               </Pressable>
             ))}
@@ -228,33 +243,30 @@ const styles = StyleSheet.create({
   iconButton: { width: 42, height: 42, borderRadius: 22, alignItems: 'center', justifyContent: 'center', backgroundColor: colors.featuredOverlayTint, borderWidth: 1, borderColor: colors.contrastBorderSubtle },
   heroContent: { paddingHorizontal: 22, paddingBottom: 22, gap: 11 },
   pills: { flexDirection: 'row', flexWrap: 'wrap', alignItems: 'center', gap: 7, marginBottom: 2 },
-  genrePill: { paddingHorizontal: 10, paddingVertical: 6, borderRadius: 16, backgroundColor: colors.accent },
-  subGenrePill: { paddingHorizontal: 10, paddingVertical: 6, borderRadius: 16, borderWidth: 1, borderColor: colors.contrastBorderMedium, backgroundColor: colors.featuredOverlayTint },
-  pillText: { color: colors.accentText, fontSize: 10, lineHeight: 12, fontWeight: '800' },
+  genrePill: { paddingHorizontal: 10, paddingVertical: 6, borderRadius: 16, backgroundColor: colors.variantBackgroundTranslucent, borderWidth: 1, borderColor: colors.contrastBorderSoft },
+  subGenrePill: { paddingHorizontal: 10, paddingVertical: 6, borderRadius: 16, borderWidth: 1, borderColor: colors.contrastBorderSoft, backgroundColor: colors.variantBackgroundTranslucent },
+  pillText: { color: colors.defaultText, fontSize: 10, lineHeight: 12, fontWeight: '700' },
   subGenreText: { color: colors.defaultText, fontSize: 10, lineHeight: 12, fontWeight: '600' },
   title: { color: colors.defaultText, fontSize: 31, lineHeight: 36, fontWeight: '800' },
   metadata: { flexDirection: 'row', alignItems: 'center', gap: 9 },
   rating: { flexDirection: 'row', alignItems: 'center', gap: 5 },
+  episodeCount: { flexDirection: 'row', alignItems: 'center', gap: 5 },
   metadataText: { color: colors.secondaryText, fontSize: 12, fontWeight: '600' },
   metadataDot: { width: 3, height: 3, borderRadius: 2, backgroundColor: colors.mutedText },
   primaryActions: { flexDirection: 'row', gap: 10, marginTop: 5 },
   playButton: { flex: 1, height: 45, borderRadius: 24, backgroundColor: colors.buttonBackground, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 8 },
   playLabel: { color: colors.buttonText, fontSize: 13, fontWeight: '800' },
-  favoriteButton: { height: 45, paddingHorizontal: 15, borderRadius: 24, backgroundColor: colors.variantBackgroundTranslucent, borderWidth: 1, borderColor: colors.contrastBorderSoft, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 8 },
-  favoriteLabel: { color: colors.defaultText, fontSize: 12, fontWeight: '700' },
+  favoriteButton: { width: 45, height: 45, borderRadius: 23, backgroundColor: colors.variantBackgroundTranslucent, borderWidth: 1, borderColor: colors.contrastBorderSoft, alignItems: 'center', justifyContent: 'center' },
+  favoriteButtonActive: { backgroundColor: colors.spotlightBackgroundTranslucent, borderColor: colors.spotlightBorderTranslucent },
   section: { paddingTop: 26, paddingHorizontal: 20 },
   sectionHeading: { color: colors.defaultText, fontSize: 18, lineHeight: 23, fontWeight: '800', marginBottom: 12 },
   synopsis: { color: colors.secondaryText, fontSize: 13, lineHeight: 21 },
-  readMoreButton: { alignSelf: 'flex-start', paddingTop: 7 },
-  readMore: { color: colors.accent, fontSize: 12, fontWeight: '700' },
-  reasonList: { gap: 13 },
-  reasonRow: { flexDirection: 'row', alignItems: 'center', gap: 12, borderRadius: 13, padding: 12, backgroundColor: '#18172B' },
-  reasonNumber: { width: 36, height: 36, borderRadius: 18, alignItems: 'center', justifyContent: 'center', backgroundColor: colors.accentBackgroundTranslucent, borderWidth: 1, borderColor: colors.accentBorderTranslucent },
-  reasonNumberAlternate: { backgroundColor: colors.spotlightBackgroundTranslucent, borderColor: colors.spotlightBorderTranslucent },
-  reasonNumberText: { color: colors.accent, fontSize: 11, fontWeight: '800' },
-  reasonCopy: { flex: 1, gap: 3 },
-  reasonTitle: { color: colors.defaultText, fontSize: 12, fontWeight: '700' },
-  reasonDetail: { color: colors.secondaryText, fontSize: 11, lineHeight: 16 },
+  loveCard: { borderRadius: 14, paddingHorizontal: 14, paddingVertical: 14, gap: 12, backgroundColor: colors.backgroundElement, borderWidth: 1, borderColor: colors.contrastBorderSubtle },
+  loveItem: { flexDirection: 'row', alignItems: 'flex-start', gap: 11 },
+  loveCopy: { flex: 1, gap: 4 },
+  loveTitle: { color: colors.defaultText, fontSize: 12, fontWeight: '700' },
+  loveDetail: { color: colors.secondaryText, fontSize: 11, lineHeight: 16 },
+  loveDivider: { height: 1, backgroundColor: colors.divider },
   peopleList: { gap: 15, paddingRight: 20 },
   person: { width: 76, alignItems: 'center' },
   personImage: { width: 68, height: 68, borderRadius: 34, marginBottom: 8, backgroundColor: colors.backgroundElement },
@@ -262,25 +274,25 @@ const styles = StyleSheet.create({
   personRole: { color: colors.mutedText, fontSize: 10, marginTop: 3 },
   episodesHeadingRow: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' },
   seasonLabel: { color: colors.secondaryText, fontSize: 11, fontWeight: '600', marginBottom: 12 },
-  unlockCard: { minHeight: 72, borderRadius: 13, paddingHorizontal: 13, paddingVertical: 12, flexDirection: 'row', alignItems: 'center', gap: 11, backgroundColor: colors.accentBackgroundTranslucent, borderWidth: 1, borderColor: colors.accentBorderSoft, marginBottom: 14 },
-  unlockIcon: { width: 38, height: 38, borderRadius: 12, alignItems: 'center', justifyContent: 'center', backgroundColor: colors.accentBackgroundSoft },
+  unlockCard: { minHeight: 72, borderRadius: 13, paddingHorizontal: 13, paddingVertical: 12, flexDirection: 'row', alignItems: 'center', gap: 11, backgroundColor: colors.spotlightBackgroundTranslucent, borderWidth: 1, borderColor: colors.spotlightBorderTranslucent, marginBottom: 14 },
+  unlockIcon: { width: 38, height: 38, borderRadius: 12, alignItems: 'center', justifyContent: 'center', backgroundColor: colors.spotlightBackgroundTranslucent },
   unlockCopy: { flex: 1, gap: 4 },
   unlockTitle: { color: colors.defaultText, fontSize: 12, fontWeight: '800' },
   unlockSubtitle: { color: colors.secondaryText, fontSize: 10 },
-  unlockArrow: { color: colors.accent, fontSize: 26, lineHeight: 28, fontWeight: '300' },
   episodeList: { gap: 10 },
-  episodeRow: { minHeight: 75, flexDirection: 'row', alignItems: 'center', gap: 12, borderRadius: 12, padding: 8, backgroundColor: '#18172B' },
+  episodeRow: { minHeight: 75, flexDirection: 'row', alignItems: 'center', gap: 12 },
   episodeThumbnailWrap: { width: 112, height: 61, borderRadius: 8, overflow: 'hidden', justifyContent: 'center', backgroundColor: colors.backgroundElement },
   episodeThumbnail: { ...StyleSheet.absoluteFill, width: undefined, height: undefined },
   thumbnailShade: { ...StyleSheet.absoluteFill, backgroundColor: colors.featuredOverlayTint },
   episodeNumber: { color: colors.defaultText, fontSize: 16, fontWeight: '800', marginLeft: 11 },
-  episodeLock: { position: 'absolute', right: 7, top: 7, width: 23, height: 23, borderRadius: 12, alignItems: 'center', justifyContent: 'center', backgroundColor: colors.overlayTranslucentStrong },
-  episodeCopy: { flex: 1, gap: 5 },
+  episodePlayButton: { position: 'absolute', left: '50%', top: '50%', width: 28, height: 28, marginLeft: -14, marginTop: -14, borderRadius: 14, alignItems: 'center', justifyContent: 'center', backgroundColor: colors.overlayTranslucentStrong },
+  episodeCopy: { flex: 1, gap: 7 },
   episodeTitle: { color: colors.defaultText, fontSize: 12, fontWeight: '700' },
+  episodeMeta: { flexDirection: 'row', alignItems: 'center', gap: 5 },
   episodeDuration: { color: colors.mutedText, fontSize: 10 },
-  showMoreButton: { height: 42, marginTop: 12, borderRadius: 22, borderWidth: 1, borderColor: '#504B78', flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 8 },
-  showMoreLabel: { color: colors.secondaryText, fontSize: 11, fontWeight: '700' },
-  showMoreChevron: { color: colors.secondaryText, fontSize: 16, lineHeight: 18 },
+  episodeUnlock: { color: colors.spotlightText, fontSize: 10, fontWeight: '700', marginLeft: 5 },
+  showMoreButton: { alignSelf: 'center', minHeight: 38, marginTop: 10, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 8 },
+  showMoreLabel: { color: colors.secondaryText, fontSize: 11, fontWeight: '600' },
   recommendationSection: { paddingHorizontal: 0 },
   recommendationList: { paddingHorizontal: 20, gap: 12, paddingBottom: 2 },
   recommendationCard: { width: 132, height: 172, borderRadius: 12, overflow: 'hidden', backgroundColor: colors.backgroundElement, justifyContent: 'flex-end' },
