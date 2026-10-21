@@ -1,6 +1,6 @@
 import { router, useLocalSearchParams } from 'expo-router';
 import { useMemo } from 'react';
-import { Image, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { Image, Pressable, ScrollView, StyleSheet, Text, TextProps, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import ArrowLeftIcon from '@/assets/svg/icon/arrow-left.svg';
@@ -12,8 +12,8 @@ import LockIcon from '@/assets/svg/icon/lock.svg';
 import PlayIcon from '@/assets/svg/icon/play.svg';
 import PlaylistIcon from '@/assets/svg/icon/playlist.svg';
 import ShareIcon from '@/assets/svg/icon/share.svg';
-import StarIcon from '@/assets/svg/icon/star.svg';
 import ShineStarIcon from '@/assets/svg/icon/shine-star.svg';
+import StarIcon from '@/assets/svg/icon/star.svg';
 import UnlockIcon from '@/assets/svg/icon/unlock.svg';
 import { Colors } from '@/constants/theme';
 import { defaultSeriesSynopsis, type Series } from '@/mock/mock';
@@ -32,8 +32,8 @@ const castAndCrew = [
 
 const recommendationIds = ['s02', 's03', 's04', 's05', 's06', 's07', 's08', 's09'];
 
-function SectionHeading({ children }: { children: string }) {
-  return <Text style={styles.sectionHeading}>{children}</Text>;
+function SectionHeading({ children, style }: Omit<TextProps, "ref">) {
+  return <Text style={[styles.sectionHeading, style]}>{children}</Text>;
 }
 
 function IconButton({ children, label, onPress }: { children: React.ReactNode; label: string; onPress?: () => void }) {
@@ -218,7 +218,7 @@ export default function SeriesDetailsScreen() {
         </View>
 
         <View style={[styles.section, styles.recommendationSection]}>
-          <SectionHeading>You Might Also Like</SectionHeading>
+          <SectionHeading style={{paddingLeft: 20}}>You Might Also Like</SectionHeading>
           <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.recommendationList}>
             {recommendations.map((item) => (
               <Pressable key={item.id} onPress={() => router.push({ pathname: '/series/[id]', params: { id: item.id } })} style={styles.recommendationCard} accessibilityRole="button" accessibilityLabel={`View ${item.title}`}>
