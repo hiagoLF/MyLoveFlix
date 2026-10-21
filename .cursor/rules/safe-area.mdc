@@ -1,0 +1,11 @@
+---
+description: Safe-area spacing for Expo screens and bottom tabs
+globs: src/**/*.tsx
+alwaysApply: false
+---
+
+# Safe area
+
+- Use `useSafeAreaInsets()` and apply insets with `paddingTop` and `paddingBottom`.
+- The bottom-tab navigator owns `paddingBottom: insets.bottom` and includes that inset in its height.
+- Screens rendered inside bottom tabs apply the top inset only; do not add bottom safe-area padding to them.

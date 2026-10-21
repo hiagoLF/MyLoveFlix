@@ -1,13 +1,16 @@
 import { router } from 'expo-router';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { Colors } from '@/constants/theme';
 
 const colors = Colors.dark;
 
 export default function AvailableSoonScreen() {
+  const { top } = useSafeAreaInsets();
+
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, { paddingTop: top }]}>
       <View style={styles.mark}><Text style={styles.markText}>♡</Text></View>
       <Text style={styles.title}>Em breve</Text>
       <Text style={styles.description}>Estamos preparando novidades para você.</Text>

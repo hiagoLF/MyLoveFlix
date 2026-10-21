@@ -1,4 +1,5 @@
 import { Tabs } from 'expo-router';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import CompassIcon from '@/assets/svg/icon/compass.svg';
 import HeartIcon from '@/assets/svg/icon/heart.svg';
@@ -10,6 +11,8 @@ import { Colors } from '@/constants/theme';
 const colors = Colors.dark;
 
 export default function AppTabs() {
+  const { bottom } = useSafeAreaInsets();
+
   return (
     <Tabs
       screenOptions={{
@@ -19,9 +22,9 @@ export default function AppTabs() {
         tabBarStyle: {
           backgroundColor: colors.background,
           borderTopColor: colors.divider,
-          height: 68,
+          height: 60 + bottom,
           paddingTop: 8,
-          paddingBottom: 8,
+          paddingBottom: bottom,
         },
         tabBarLabelStyle: { fontSize: 10, fontWeight: '600' },
       }}>

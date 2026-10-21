@@ -1,7 +1,7 @@
 import { router } from 'expo-router';
 import { useMemo, useState } from 'react';
 import { Image, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import BellIcon from '@/assets/svg/icon/bell.svg';
 import GlassSearchIcon from '@/assets/svg/icon/glass-search.svg';
@@ -33,6 +33,7 @@ function IconButton({ children, label, onPress = openAvailableSoon, highlighted 
 
 export default function HomeScreen() {
   const [selectedGenre, setSelectedGenre] = useState('All');
+  const { top } = useSafeAreaInsets();
   const filteredSeries = useMemo(() => selectedGenre === 'All' ? series : series.filter((item) => item.genres.includes(selectedGenre)), [selectedGenre]);
   const visibleSections = useMemo(() => feedSections.map((section) => ({
     ...section,
@@ -40,8 +41,8 @@ export default function HomeScreen() {
   })), [filteredSeries]);
 
   return (
-    <SafeAreaView style={styles.safeArea} edges={['top']}>
-      <ScrollView style={styles.scroll} contentContainerStyle={styles.content} showsVerticalScrollIndicator={false}>
+    <View style={styles.screen}>
+      <ScrollView style={styles.scroll} contentContainerStyle={[styles.content, { paddingTop: top }]} showsVerticalScrollIndicator={false}>
         <View style={styles.header}>
           <IconButton label="Favoritos" highlighted><HeartIcon color={colors.accentText} width={18} height={17} /></IconButton>
           <View style={styles.headerActions}>
@@ -117,12 +118,12 @@ export default function HomeScreen() {
           </View>
         ))}
       </ScrollView>
-    </SafeAreaView>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
-  safeArea: { flex: 1, backgroundColor: colors.background },
+  screen: { flex: 1, backgroundColor: colors.background },
   scroll: { flex: 1 },
   content: { paddingBottom: 24 },
   header: { paddingHorizontal: 16, paddingVertical: 12, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' },
