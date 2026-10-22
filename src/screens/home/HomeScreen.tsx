@@ -49,14 +49,14 @@ export default function HomeScreen() {
     <View style={styles.screen}>
       <ScrollView style={styles.scroll} contentContainerStyle={[styles.content, { paddingTop: top }]} showsVerticalScrollIndicator={false}>
         <View style={styles.header}>
-          <IconButton label="Favoritos" highlighted><HeartIcon color={colors.accentText} width={18} height={17} /></IconButton>
+          <IconButton label="Favorites" highlighted><HeartIcon color={colors.accentText} width={18} height={17} /></IconButton>
           <View style={styles.headerActions}>
-            <IconButton label="Buscar"><GlassSearchIcon color={colors.secondaryText} width={18} height={18} /></IconButton>
+            <IconButton label="Search"><GlassSearchIcon color={colors.secondaryText} width={18} height={18} /></IconButton>
             <View style={styles.notificationButton}>
-              <IconButton label="Notificações"><BellIcon color={colors.secondaryText} width={18} height={20} /></IconButton>
+              <IconButton label="Notifications"><BellIcon color={colors.secondaryText} width={18} height={20} /></IconButton>
               <View style={styles.notificationDot} />
             </View>
-            <Pressable onPress={openAvailableSoon} accessibilityRole="button" accessibilityLabel="Perfil" style={styles.avatarWrap}>
+            <Pressable onPress={openAvailableSoon} accessibilityRole="button" accessibilityLabel="Profile" style={styles.avatarWrap}>
               <Image source={{ uri: 'https://picsum.photos/id/64/100/100.jpg' }} style={styles.avatar} />
             </Pressable>
           </View>
@@ -78,13 +78,13 @@ export default function HomeScreen() {
               <StarIcon color={colors.featuredMetaText} width={15} height={15} />
               <Text style={styles.metaText}>{featured.score.toFixed(1)}</Text>
               <View style={styles.metaSeparator} />
-              <Text style={styles.metaText}>{featured.episodesAmount} episódios</Text>
+              <Text style={styles.metaText}>{featured.episodesAmount} episodes</Text>
             </View>
             <View style={styles.featuredActions}>
               <Pressable onPress={openAvailableSoon} style={styles.watchButton} accessibilityRole="button">
-                <PlayIcon color={colors.buttonText} width={12} height={14} /><Text style={styles.watchLabel}>Ver agora</Text>
+                <PlayIcon color={colors.buttonText} width={12} height={14} /><Text style={styles.watchLabel}>Watch now</Text>
               </Pressable>
-              <Pressable onPress={openAvailableSoon} style={styles.addButton} accessibilityRole="button" accessibilityLabel="Adicionar à lista">
+              <Pressable onPress={openAvailableSoon} style={styles.addButton} accessibilityRole="button" accessibilityLabel="Add to list">
                 <PlusIcon color={colors.buttonVariantText} width={16} height={16} />
               </Pressable>
             </View>
