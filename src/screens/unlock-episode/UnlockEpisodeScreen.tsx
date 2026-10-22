@@ -1,6 +1,6 @@
 import { router, useLocalSearchParams } from 'expo-router';
 import { useState } from 'react';
-import { Image, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { Image, TouchableOpacity, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import AngularRayIcon from '@/assets/svg/icon/angular-ray.svg';
@@ -53,9 +53,9 @@ export default function UnlockEpisodeScreen() {
       <View style={[styles.notFound, { paddingTop: top + 24 }]}>
         <Text style={styles.notFoundTitle}>Episode unavailable</Text>
         <Text style={styles.mutedText}>We couldn’t find this locked episode.</Text>
-        <Pressable onPress={() => router.back()} accessibilityRole="button" style={styles.backButton}>
+        <TouchableOpacity onPress={() => router.back()} accessibilityRole="button" style={styles.backButton}>
           <Text style={styles.coinAccentText}>Go back</Text>
-        </Pressable>
+        </TouchableOpacity>
       </View>
     );
   }
@@ -65,9 +65,9 @@ export default function UnlockEpisodeScreen() {
   return (
     <View style={styles.screen}>
       <View style={[styles.header, { paddingTop: top + 4 }]}>
-        <Pressable onPress={() => router.back()} style={styles.backButton} accessibilityRole="button" accessibilityLabel="Go back">
+        <TouchableOpacity onPress={() => router.back()} style={styles.backButton} accessibilityRole="button" accessibilityLabel="Go back">
           <ArrowLeftIcon color={colors.defaultText} width={9} height={15} />
-        </Pressable>
+        </TouchableOpacity>
         <Text style={styles.headerTitle}>Unlock Episode</Text>
       </View>
 
@@ -126,7 +126,7 @@ export default function UnlockEpisodeScreen() {
           <View style={styles.dividerLine} />
         </View>
 
-        <Pressable onPress={() => router.push('/soon')} accessibilityRole="button" accessibilityLabel="VIP Membership" style={styles.vipCard}>
+        <TouchableOpacity onPress={() => router.push('/soon')} accessibilityRole="button" accessibilityLabel="VIP Membership" style={styles.vipCard}>
           <View style={styles.crownBadge}>
             <CrownIcon color={colors.secondaryTextStrong} width={22} height={20} />
           </View>
@@ -138,7 +138,7 @@ export default function UnlockEpisodeScreen() {
             <Text style={styles.vipPriceAmount}>€4.99</Text>
             <Text style={styles.vipPricePeriod}>/ Week</Text>
           </View>
-        </Pressable>
+        </TouchableOpacity>
       </ScrollView>
 
       <View style={[styles.purchasePanel, { paddingBottom: Math.max(bottom, 12) }]}>
@@ -153,7 +153,7 @@ export default function UnlockEpisodeScreen() {
             <Text style={styles.paymentLabel}>App Store Pay</Text>
           </View>
         </View>
-        <Pressable
+        <TouchableOpacity
           onPress={() => setPurchaseMessage('Purchases are unavailable in this demo.')}
           style={styles.purchaseButton}
           accessibilityRole="button"
@@ -161,7 +161,7 @@ export default function UnlockEpisodeScreen() {
         >
           <Text style={styles.purchaseButtonTitle}>Buy {selectedPackage.amount} Coins</Text>
           <Text style={styles.purchaseButtonPrice}>for {selectedPackage.price}</Text>
-        </Pressable>
+        </TouchableOpacity>
         <Text style={styles.legalCopy}>
           By purchasing, you agree to our Terms of Service. Subscriptions / auto-renew unless cancelled.
         </Text>
@@ -182,7 +182,7 @@ function CoinPackageCard({
   const isBestValue = coinPackage.badge === 'BEST VALUE';
 
   return (
-    <Pressable
+    <TouchableOpacity
       onPress={onPress}
       style={[styles.packageCard, selected && styles.packageCardSelected]}
       accessibilityRole="button"
@@ -207,7 +207,7 @@ function CoinPackageCard({
       <View style={[styles.packagePriceButton, selected && styles.packagePriceButtonSelected]}>
         <Text style={[styles.packagePrice, selected && styles.packagePriceSelected]}>{coinPackage.price}</Text>
       </View>
-    </Pressable>
+    </TouchableOpacity>
   );
 }
 

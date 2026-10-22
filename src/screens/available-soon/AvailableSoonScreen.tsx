@@ -1,5 +1,5 @@
 import { router } from 'expo-router';
-import { Pressable, StyleSheet, Text, View } from 'react-native';
+import { TouchableOpacity, StyleSheet, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { Colors } from '@/constants/theme';
@@ -14,9 +14,9 @@ export default function AvailableSoonScreen() {
       <View style={styles.mark}><Text style={styles.markText}>♡</Text></View>
       <Text style={styles.title}>Coming soon</Text>
       <Text style={styles.description}>We’re preparing something new for you.</Text>
-      <Pressable onPress={() => router.back()} style={styles.button} accessibilityRole="button">
+      <TouchableOpacity onPress={() => router.back()} style={styles.button} accessibilityRole="button">
         <Text style={styles.buttonText}>Go back</Text>
-      </Pressable>
+      </TouchableOpacity>
     </View>
   );
 }

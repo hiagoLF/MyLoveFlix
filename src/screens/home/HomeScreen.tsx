@@ -1,6 +1,6 @@
 import { router } from 'expo-router';
 import { useMemo, useState } from 'react';
-import { Image, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { Image, TouchableOpacity, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import BellIcon from '@/assets/svg/icon/bell.svg';
@@ -30,9 +30,9 @@ function openSeriesDetails(item: Series) {
 
 function IconButton({ children, label, onPress = openAvailableSoon, highlighted = false }: { children: React.ReactNode; label: string; onPress?: () => void; highlighted?: boolean }) {
   return (
-    <Pressable onPress={onPress} style={[styles.iconButton, highlighted && styles.highlightedIconButton]} accessibilityRole="button" accessibilityLabel={label}>
+    <TouchableOpacity onPress={onPress} style={[styles.iconButton, highlighted && styles.highlightedIconButton]} accessibilityRole="button" accessibilityLabel={label}>
       {children}
-    </Pressable>
+    </TouchableOpacity>
   );
 }
 
@@ -56,9 +56,9 @@ export default function HomeScreen() {
               <IconButton label="Notifications"><BellIcon color={colors.textPrimary} width={18} height={20} /></IconButton>
               <View style={styles.notificationDot} />
             </View>
-            <Pressable onPress={openAvailableSoon} accessibilityRole="button" accessibilityLabel="Profile" style={styles.avatarWrap}>
+            <TouchableOpacity onPress={openAvailableSoon} accessibilityRole="button" accessibilityLabel="Profile" style={styles.avatarWrap}>
               <Image source={{ uri: 'https://picsum.photos/id/64/100/100.jpg' }} style={styles.avatar} />
-            </Pressable>
+            </TouchableOpacity>
           </View>
         </View>
 
@@ -81,12 +81,12 @@ export default function HomeScreen() {
               <Text style={styles.metaText}>{featured.episodesAmount} episodes</Text>
             </View>
             <View style={styles.featuredActions}>
-              <Pressable onPress={() => router.push('/player')} style={styles.watchButton} accessibilityRole="button">
+              <TouchableOpacity onPress={() => router.push('/player')} style={styles.watchButton} accessibilityRole="button">
                 <PlayIcon color={colors.textOnAccent} width={12} height={14} /><Text style={styles.watchLabel}>Watch now</Text>
-              </Pressable>
-              <Pressable onPress={openAvailableSoon} style={styles.addButton} accessibilityRole="button" accessibilityLabel="Add to list">
+              </TouchableOpacity>
+              <TouchableOpacity onPress={openAvailableSoon} style={styles.addButton} accessibilityRole="button" accessibilityLabel="Add to list">
                 <PlusIcon color={colors.buttonVariantText} width={16} height={16} />
-              </Pressable>
+              </TouchableOpacity>
             </View>
           </View>
         </View>
@@ -117,9 +117,9 @@ export default function HomeScreen() {
                 <View key={subGenre} style={styles.subSection}>
                   <View style={styles.subHeading}>
                     <Text style={styles.subTitle}>{subGenre}</Text>
-                    <Pressable onPress={openAvailableSoon} accessibilityRole="button" accessibilityLabel={`See all ${subGenre}`} hitSlop={8}>
+                    <TouchableOpacity onPress={openAvailableSoon} accessibilityRole="button" accessibilityLabel={`See all ${subGenre}`} hitSlop={8}>
                       <Text style={styles.seeAll}>See all</Text>
-                    </Pressable>
+                    </TouchableOpacity>
                   </View>
                   <HorizontalMediaLista items={items} onPressItem={openSeriesDetails} />
                 </View>

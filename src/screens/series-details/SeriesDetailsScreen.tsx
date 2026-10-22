@@ -1,6 +1,6 @@
 import { router, useLocalSearchParams } from 'expo-router';
 import { useMemo } from 'react';
-import { Image, Pressable, ScrollView, StyleSheet, Text, TextProps, View } from 'react-native';
+import { Image, TouchableOpacity, ScrollView, StyleSheet, Text, TextProps, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import ArrowLeftIcon from '@/assets/svg/icon/arrow-left.svg';
@@ -41,9 +41,9 @@ function openAvailableSoon() {
 
 function IconButton({ children, label, onPress = openAvailableSoon, transparent = false }: { children: React.ReactNode; label: string; onPress?: () => void; transparent?: boolean }) {
   return (
-    <Pressable onPress={onPress} style={[styles.iconButton, transparent && styles.transparentButton]} accessibilityRole="button" accessibilityLabel={label}>
+    <TouchableOpacity onPress={onPress} style={[styles.iconButton, transparent && styles.transparentButton]} accessibilityRole="button" accessibilityLabel={label}>
       {children}
-    </Pressable>
+    </TouchableOpacity>
   );
 }
 
@@ -63,9 +63,9 @@ export default function SeriesDetailsScreen() {
     return (
       <View style={[styles.notFound, { paddingTop: top + 24 }]}>
         <Text style={styles.notFoundText}>We couldn’t find this series.</Text>
-        <Pressable onPress={() => router.back()} accessibilityRole="button">
+        <TouchableOpacity onPress={() => router.back()} accessibilityRole="button">
           <Text style={styles.backLabel}>Go back</Text>
-        </Pressable>
+        </TouchableOpacity>
       </View>
     );
   }
@@ -119,13 +119,13 @@ export default function SeriesDetailsScreen() {
               </View>
             </View>
             <View style={styles.primaryActions}>
-              <Pressable onPress={() => openPlayer()} style={styles.playButton} accessibilityRole="button" accessibilityLabel="Play series">
+              <TouchableOpacity onPress={() => openPlayer()} style={styles.playButton} accessibilityRole="button" accessibilityLabel="Play series">
                 <PlayIcon color={colors.textOnAccent} width={12} height={14} />
                 <Text style={styles.playLabel}>Play Ep 1</Text>
-              </Pressable>
-              <Pressable onPress={toggleCurrentFavorite} style={[styles.favoriteButton, selectedSeries.isFavorite && styles.favoriteButtonActive]} accessibilityRole="button" accessibilityLabel={favoriteLabel}>
+              </TouchableOpacity>
+              <TouchableOpacity onPress={toggleCurrentFavorite} style={[styles.favoriteButton, selectedSeries.isFavorite && styles.favoriteButtonActive]} accessibilityRole="button" accessibilityLabel={favoriteLabel}>
                 <HeartIcon color={selectedSeries.isFavorite ? colors.accent : colors.defaultText} width={18} height={17} />
-              </Pressable>
+              </TouchableOpacity>
             </View>
           </View>
         </View>
@@ -168,19 +168,19 @@ export default function SeriesDetailsScreen() {
               <SectionHeading style={styles.headingWithoutMargin}>Episodes</SectionHeading>
               <View style={styles.countBadge}><Text style={styles.reviewCount}>{selectedSeries.episodesAmount}</Text></View>
             </View>
-            <Pressable onPress={openAvailableSoon} accessibilityRole="button"><Text style={styles.sortLabel}>Sort</Text></Pressable>
+            <TouchableOpacity onPress={openAvailableSoon} accessibilityRole="button"><Text style={styles.sortLabel}>Sort</Text></TouchableOpacity>
           </View>
-          <Pressable onPress={openAvailableSoon} accessibilityRole="button" style={styles.unlockCard}>
+          <TouchableOpacity onPress={openAvailableSoon} accessibilityRole="button" style={styles.unlockCard}>
             <View style={styles.unlockCopy}>
               <Text style={styles.unlockTitle}>Unlock Full Season</Text>
               <Text style={styles.unlockSubtitle}>Save 40% with the bundle</Text>
             </View>
             <View style={styles.priceBadge}><Text style={styles.priceLabel}>€9.99</Text></View>
-          </Pressable>
+          </TouchableOpacity>
 
           <View style={styles.episodeList}>
             {seriesEpisodes.map((episode) => (
-              <Pressable
+              <TouchableOpacity
                 key={episode.number}
                 onPress={episode.locked
                   ? () => router.push({ pathname: '/unlock-episode', params: { id: selectedSeries.id, episodeNumber: String(episode.number) } })
@@ -209,23 +209,23 @@ export default function SeriesDetailsScreen() {
                     </>}
                   </View>
                 </View>
-              </Pressable>
+              </TouchableOpacity>
             ))}
           </View>
-          <Pressable onPress={openAvailableSoon} accessibilityRole="button" style={styles.showMoreButton}>
+          <TouchableOpacity onPress={openAvailableSoon} accessibilityRole="button" style={styles.showMoreButton}>
             <Text style={styles.showMoreLabel}>Show more episodes</Text>
             <ArrowRightIcon color={colors.secondaryText} width={12} height={12} />
-          </Pressable>
+          </TouchableOpacity>
         </View>
 
         <View style={[styles.section, styles.recommendationSection]}>
           <SectionHeading style={styles.recommendationHeading}>You might also like</SectionHeading>
           <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.recommendationList}>
             {recommendations.map((item) => (
-              <Pressable key={item.id} onPress={() => router.push({ pathname: '/series/[id]', params: { id: item.id } })} style={styles.recommendationCard} accessibilityRole="button" accessibilityLabel={`View ${item.title}`}>
+              <TouchableOpacity key={item.id} onPress={() => router.push({ pathname: '/series/[id]', params: { id: item.id } })} style={styles.recommendationCard} accessibilityRole="button" accessibilityLabel={`View ${item.title}`}>
                 <Image source={{ uri: item.imageUrl }} style={styles.recommendationImage} />
                 <Text numberOfLines={2} style={styles.recommendationTitle}>{item.title}</Text>
-              </Pressable>
+              </TouchableOpacity>
             ))}
           </ScrollView>
         </View>

@@ -1,4 +1,4 @@
-import { FlatList, Image, Pressable, StyleSheet, Text, View } from 'react-native';
+import { FlatList, Image, TouchableOpacity, StyleSheet, Text, View } from 'react-native';
 
 import CrownIcon from '@/assets/svg/icon/crown.svg';
 import { Colors, Fonts } from '@/constants/theme';
@@ -17,7 +17,7 @@ export function HorizontalMediaLista({ items, onPressItem }: Props) {
       showsHorizontalScrollIndicator={false}
       contentContainerStyle={styles.list}
       renderItem={({ item }) => (
-        <Pressable
+        <TouchableOpacity
           onPress={() => onPressItem?.(item)}
           style={styles.card}
           accessibilityRole="button"
@@ -41,7 +41,7 @@ export function HorizontalMediaLista({ items, onPressItem }: Props) {
             </View>
           </View>
           <Text numberOfLines={2} style={styles.title}>{item.title}</Text>
-        </Pressable>
+        </TouchableOpacity>
       )}
     />
   );

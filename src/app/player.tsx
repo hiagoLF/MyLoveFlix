@@ -1,7 +1,7 @@
 import { useEvent } from 'expo';
 import { router } from 'expo-router';
 import { useVideoPlayer, VideoView } from 'expo-video';
-import { Pressable, StatusBar, StyleSheet, Text, View } from 'react-native';
+import { TouchableOpacity, StatusBar, StyleSheet, Text, View } from 'react-native';
 
 const videoUrl = 'https://lorem.video/cat_128kbps';
 
@@ -15,17 +15,17 @@ export default function PlayerScreen() {
     <View style={styles.screen}>
       <StatusBar hidden />
       <VideoView player={player} style={StyleSheet.absoluteFill} contentFit="contain" nativeControls={false} />
-      <Pressable onPress={() => router.back()} style={styles.closeButton} accessibilityRole="button" accessibilityLabel="Close video">
+      <TouchableOpacity onPress={() => router.back()} style={styles.closeButton} accessibilityRole="button" accessibilityLabel="Close video">
         <Text style={styles.closeLabel}>×</Text>
-      </Pressable>
-      <Pressable
+      </TouchableOpacity>
+      <TouchableOpacity
         onPress={() => isPlaying ? player.pause() : player.play()}
         style={styles.playPauseButton}
         accessibilityRole="button"
         accessibilityLabel={isPlaying ? 'Pause video' : 'Play video'}
       >
         <Text style={styles.playPauseLabel}>{isPlaying ? 'Ⅱ' : '▶'}</Text>
-      </Pressable>
+      </TouchableOpacity>
     </View>
   );
 }

@@ -36,6 +36,7 @@ Docs: https://docs.expo.dev/eas/index.md
 
 ## Rules
 
+- Use `TouchableOpacity` for all pressable buttons, unless the feature requires a different component.
 - Name theme colors by semantic role (such as `defaultText`, `buttonBackground`, or `badgeBackground`), never by the component that consumes them. Keep colors reusable across components.
 - Keep every interface color faithful to its visual reference; add semantic theme colors or adjust existing theme colors when needed to match it.
 - Use `experimental_backgroundImage` as the default for gradients; use `AutoWidthMaskedView` when a gradient needs a mask.

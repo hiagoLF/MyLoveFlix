@@ -1,4 +1,4 @@
-import { FlatList, Pressable, StyleSheet, Text, View } from 'react-native';
+import { FlatList, TouchableOpacity, StyleSheet, Text, View } from 'react-native';
 
 import { Colors } from '@/constants/theme';
 
@@ -17,11 +17,11 @@ export function HorizontalGenres({ items, selected, onSelect }: Props) {
       renderItem={({ item }) => {
         const active = item === selected;
         return (
-          <Pressable onPress={() => onSelect(item)} accessibilityRole="button" accessibilityState={{ selected: active }}>
+          <TouchableOpacity onPress={() => onSelect(item)} accessibilityRole="button" accessibilityState={{ selected: active }}>
             <View style={[styles.chip, active && styles.activeChip]}>
               <Text style={[styles.label, active && styles.activeLabel]}>{item}</Text>
             </View>
-          </Pressable>
+          </TouchableOpacity>
         );
       }}
     />
