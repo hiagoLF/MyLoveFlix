@@ -59,5 +59,14 @@
   "accentGlowShadow": "0 0 20px #64EDF740",
   "borderSubtle": "#363250",
   "backgroundGradient": "linear-gradient(180deg, #00000000 0%, #000000 100%)",
-  "backdropOverlayGradient": "linear-gradient(180deg, #00000050 0%, #000000 100%)"
+  "backdropOverlayGradient": "linear-gradient(180deg, #00000050 0%, #000000 100%)",
+  "backdropFadeGradient": "linear-gradient(180deg, #00000088 0%, #00000008 25%, #00000066 55%, #000000 100%)",
+  "scrimBackground": "#00000066",
+  "surfaceSubtle": "#0B0A12",
+  "borderMuted": "#1E1D35",
+  "dividerTranslucent": "#322F5666",
+  "surfaceRecessed": "#060609",
+  "offerBackgroundGradient": "linear-gradient(90deg, #18172B 0%, #3404494D 100%)",
+  "textOnSpotlight": "#340449",
+  "spotlightGlowShadow": "0 0 16px #CB64F740"
 }
