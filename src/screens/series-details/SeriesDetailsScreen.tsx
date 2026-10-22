@@ -35,7 +35,11 @@ function SectionHeading({ children, style }: Omit<TextProps, "ref">) {
   return <Text style={[styles.sectionHeading, style]}>{children}</Text>;
 }
 
-function IconButton({ children, label, onPress, transparent = false }: { children: React.ReactNode; label: string; onPress?: () => void; transparent?: boolean }) {
+function openAvailableSoon() {
+  router.push('/soon');
+}
+
+function IconButton({ children, label, onPress = openAvailableSoon, transparent = false }: { children: React.ReactNode; label: string; onPress?: () => void; transparent?: boolean }) {
   return (
     <Pressable onPress={onPress} style={[styles.iconButton, transparent && styles.transparentButton]} accessibilityRole="button" accessibilityLabel={label}>
       {children}
@@ -164,9 +168,9 @@ export default function SeriesDetailsScreen() {
               <SectionHeading style={styles.headingWithoutMargin}>Episodes</SectionHeading>
               <View style={styles.countBadge}><Text style={styles.reviewCount}>{selectedSeries.episodesAmount}</Text></View>
             </View>
-            <Pressable accessibilityRole="button"><Text style={styles.sortLabel}>Sort</Text></Pressable>
+            <Pressable onPress={openAvailableSoon} accessibilityRole="button"><Text style={styles.sortLabel}>Sort</Text></Pressable>
           </View>
-          <Pressable accessibilityRole="button" style={styles.unlockCard}>
+          <Pressable onPress={openAvailableSoon} accessibilityRole="button" style={styles.unlockCard}>
             <View style={styles.unlockCopy}>
               <Text style={styles.unlockTitle}>Unlock Full Season</Text>
               <Text style={styles.unlockSubtitle}>Save 40% with the bundle</Text>
@@ -208,7 +212,7 @@ export default function SeriesDetailsScreen() {
               </Pressable>
             ))}
           </View>
-          <Pressable accessibilityRole="button" style={styles.showMoreButton}>
+          <Pressable onPress={openAvailableSoon} accessibilityRole="button" style={styles.showMoreButton}>
             <Text style={styles.showMoreLabel}>Show more episodes</Text>
             <ArrowRightIcon color={colors.secondaryText} width={12} height={12} />
           </Pressable>

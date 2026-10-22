@@ -36,7 +36,7 @@ export default function AppTabs() {
       <Tabs.Screen name="romance" options={{ title: 'Favorite', tabBarIcon: ({ color }) => <HeartIcon color={color} width={24} height={24} /> }} />
       <Tabs.Screen name="library" options={{ title: 'My List', tabBarIcon: ({ color }) => <MarkerIcon color={color} width={24} height={24} /> }} />
       <Tabs.Screen name="profile" options={{ title: 'Profile', tabBarIcon: ({ color }) => <PersonIcon color={color} width={24} height={24} /> }} />
-      <Tabs.Screen name="soon" options={{ href: null }} />
+      <Tabs.Screen name="soon" options={{ tabBarButton: () => null, tabBarItemStyle: { display: 'none' } }} />
     </Tabs>
   );
 }

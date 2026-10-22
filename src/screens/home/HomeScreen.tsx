@@ -81,7 +81,7 @@ export default function HomeScreen() {
               <Text style={styles.metaText}>{featured.episodesAmount} episodes</Text>
             </View>
             <View style={styles.featuredActions}>
-              <Pressable onPress={openAvailableSoon} style={styles.watchButton} accessibilityRole="button">
+              <Pressable onPress={() => router.push('/player')} style={styles.watchButton} accessibilityRole="button">
                 <PlayIcon color={colors.textOnAccent} width={12} height={14} /><Text style={styles.watchLabel}>Watch now</Text>
               </Pressable>
               <Pressable onPress={openAvailableSoon} style={styles.addButton} accessibilityRole="button" accessibilityLabel="Add to list">

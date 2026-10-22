@@ -126,7 +126,7 @@ export default function UnlockEpisodeScreen() {
           <View style={styles.dividerLine} />
         </View>
 
-        <View style={styles.vipCard}>
+        <Pressable onPress={() => router.push('/soon')} accessibilityRole="button" accessibilityLabel="VIP Membership" style={styles.vipCard}>
           <View style={styles.crownBadge}>
             <CrownIcon color={colors.secondaryTextStrong} width={22} height={20} />
           </View>
@@ -138,7 +138,7 @@ export default function UnlockEpisodeScreen() {
             <Text style={styles.vipPriceAmount}>€4.99</Text>
             <Text style={styles.vipPricePeriod}>/ Week</Text>
           </View>
-        </View>
+        </Pressable>
       </ScrollView>
 
       <View style={[styles.purchasePanel, { paddingBottom: Math.max(bottom, 12) }]}>
