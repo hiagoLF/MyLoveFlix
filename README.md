@@ -4,11 +4,15 @@
 
 MyLoveFlix is a mobile streaming app built with Expo and React Native. Explore series by genre, discover featured stories, browse episodes, and watch them in an immersive player.
 
+### Android APK
+
+[Download the Android APK](https://expo.dev/accounts/hiagolf/projects/MyLoveFlix/builds/cbe4448a-4aa0-4c57-a8f5-a8f54c3ccf25).
+
 ### App demo
 
 See MyLoveFlix in action:
 
-<img src="demo/my-love-flix-demo.gif" alt="MyLoveFlix app demo" width="300" />
+<img src="demo/my-love-flix-demo.gif" alt="MyLoveFlix app demo" style="max-height: 450px" />
 
 ## Get started
 
