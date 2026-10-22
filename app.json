@@ -16,7 +16,8 @@
         "foregroundImage": "./assets/images/android-icon-foreground.png",
         "monochromeImage": "./assets/images/android-icon-monochrome.png"
       },
-      "predictiveBackGestureEnabled": false
+      "predictiveBackGestureEnabled": false,
+      "package": "com.hiagolf.MyLoveFlix"
     },
     "web": {
       "output": "server",
@@ -38,11 +39,21 @@
     "experiments": {
       "typedRoutes": true,
       "reactCompiler": true
+    },
+    "extra": {
+      "router": {
+        "asyncRoutes": {
+          "web": true
+        }
+      },
+      "eas": {
+        "projectId": "f81da6d3-f71f-4ede-b9de-8356d8c09b05"
+      }
     }
   },
   "build": {
     "preview": {
-    "distribution": "internal"
+      "distribution": "internal"
     }
   }
 }
