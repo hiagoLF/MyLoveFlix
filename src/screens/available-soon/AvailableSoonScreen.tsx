@@ -12,10 +12,10 @@ export default function AvailableSoonScreen() {
   return (
     <View style={[styles.container, { paddingTop: top }]}>
       <View style={styles.mark}><Text style={styles.markText}>♡</Text></View>
-      <Text style={styles.title}>Em breve</Text>
-      <Text style={styles.description}>Estamos preparando novidades para você.</Text>
+      <Text style={styles.title}>Coming soon</Text>
+      <Text style={styles.description}>We’re preparing something new for you.</Text>
       <Pressable onPress={() => router.back()} style={styles.button} accessibilityRole="button">
-        <Text style={styles.buttonText}>Voltar</Text>
+        <Text style={styles.buttonText}>Go back</Text>
       </Pressable>
     </View>
   );
