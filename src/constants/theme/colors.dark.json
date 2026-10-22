@@ -52,5 +52,12 @@
   "coinActionBackground": "#203143",
   "bonusText": "#D86AFF",
   "surfaceOverlay": "#171629",
-  "surfaceOverlayBorder": "#28263F"
+  "surfaceOverlayBorder": "#28263F",
+  "textPrimary": "#FFFFFF",
+  "textSecondary": "#D1D5DB",
+  "textOnAccent": "#044449",
+  "accentGlowShadow": "0 0 20px #64EDF740",
+  "borderSubtle": "#363250",
+  "backgroundGradient": "linear-gradient(180deg, #00000000 0%, #000000 100%)",
+  "backdropOverlayGradient": "linear-gradient(180deg, #00000050 0%, #000000 100%)"
 }

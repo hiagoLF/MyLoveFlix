@@ -29,9 +29,9 @@ export function HorizontalGenres({ items, selected, onSelect }: Props) {
 }
 
 const styles = StyleSheet.create({
-  list: { paddingHorizontal: 16, gap: 9, paddingBottom: 3 },
-  chip: { paddingHorizontal: 17, height: 36, borderRadius: 20, borderWidth: 1, borderColor: colors.buttonVariantBorder, backgroundColor: colors.tagBackground, alignItems: 'center', justifyContent: 'center' },
+  list: { paddingHorizontal: 16, gap: 8, paddingBottom: 0 },
+  chip: { paddingHorizontal: 16, height: 34, borderRadius: 17, borderWidth: 1, borderColor: colors.borderSubtle, backgroundColor: colors.tagBackground, alignItems: 'center', justifyContent: 'center' },
   activeChip: { borderColor: colors.accent, backgroundColor: colors.accent },
-  label: { color: colors.secondaryText, fontSize: 12, fontWeight: '600' },
-  activeLabel: { color: colors.accentText },
+  label: { color: colors.secondaryText, fontSize: 14 },
+  activeLabel: { color: colors.textOnAccent },
 });
