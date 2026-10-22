@@ -1,6 +1,14 @@
-# Welcome to your Expo app 👋
+# MyLoveFlix
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+## About the app
+
+MyLoveFlix is a mobile streaming app built with Expo and React Native. Explore series by genre, discover featured stories, browse episodes, and watch them in an immersive player.
+
+### App demo
+
+See MyLoveFlix in action:
+
+<img src="demo/my-love-flix-demo.gif" alt="MyLoveFlix app demo" width="300" />
 
 ## Get started
 
