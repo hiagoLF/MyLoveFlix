@@ -12,9 +12,13 @@ MyLoveFlix is a mobile streaming app built with Expo and React Native. Explore s
 
 See MyLoveFlix in action:
 
-<img src="demo/details.gif" alt="MyLoveFlix details demo" style="max-height: 450px" />
-<img src="demo/feed.gif" alt="MyLoveFlix feed demo" style="max-height: 450px" />
-<img src="demo/unlock.gif" alt="MyLoveFlix unlock demo" style="max-height: 450px" />
+<table>
+  <tr>
+    <td><img src="demo/details.gif" alt="MyLoveFlix details demo" width="220" /></td>
+    <td><img src="demo/feed.gif" alt="MyLoveFlix feed demo" width="220" /></td>
+    <td><img src="demo/unlock.gif" alt="MyLoveFlix unlock demo" width="220" /></td>
+  </tr>
+</table>
 
 ## Get started
 
